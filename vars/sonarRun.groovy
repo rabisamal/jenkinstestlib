@@ -1,4 +1,4 @@
-def sonarRun(password)
+def call(password)
 {
     withSonarQubeEnv("$password") {
 

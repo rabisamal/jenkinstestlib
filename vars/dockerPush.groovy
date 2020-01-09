@@ -1,4 +1,4 @@
-def dockerPush(IMAGETAG)
+def call(IMAGETAG)
 {
     sh("docker push ${IMAGETAG}")
 }

@@ -1,4 +1,4 @@
-def dockerBuild(IMAGETAG)
+def call(IMAGETAG)
 {
     sh("docker build -t ${IMAGETAG} .")
 }

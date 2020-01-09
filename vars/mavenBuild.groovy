@@ -1,4 +1,4 @@
-def mavenBuild()
+def call()
 {
     sh "mvn package -DskipTests=true"
 }

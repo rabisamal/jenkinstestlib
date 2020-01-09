@@ -1,4 +1,4 @@
-def publisToNexus()
+def call()
 {
     script {
 
