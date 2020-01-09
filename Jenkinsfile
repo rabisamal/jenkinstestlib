@@ -56,6 +56,11 @@ pipeline {
                     mavenBuild();
             }
         }
+        stage("Waiting") {
+            steps {
+		sh("sleep 10")                   
+            }
+        }
 
         stage('Unitesting') {
             steps {
@@ -82,9 +87,15 @@ pipeline {
         }
 
         stage('Deploying Application') {
+          if ( env.BRANCH_NAME == "deployment") {  
             steps {
+                sh(echo development env.BRANCH_NAME)
                 kubeDeploy("${NAMESPACE}", "${APPNAME}", "${PROJECT}", "${IMAGEVERSION}", "${IMAGETAG}")
             }
+         } else {
+                sh(echo DevOps env.BRANCH_NAME)
+                kubeDeploy("${NAMESPACE}", "${APPNAME}", "${PROJECT}", "${IMAGEVERSION}", "${IMAGETAG}")
+		}
         }
     }
 }
