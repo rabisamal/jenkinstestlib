@@ -86,7 +86,7 @@ pipeline {
              }
         }
 
-        stage("Deploying Application to env.BRANCH_NAME") {
+        stage("Deploying Application to qa") {
           when {
     	  expression {
                return env.BRANCH_NAME != 'master';
@@ -98,7 +98,7 @@ pipeline {
             }
         }
     
-        stage("Deploying Application to env.BRANCH_NAME") {
+        stage("Deploying Application to dev") {
           when {
     	  expression {
                return env.BRANCH_NAME = 'master';
