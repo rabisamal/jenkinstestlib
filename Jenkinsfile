@@ -1,4 +1,4 @@
-//@Library('name-of-shared-library')_
+@Library('my-library')_
 pipeline {
     agent any
     stages {
@@ -11,6 +11,6 @@ pipeline {
 }
 
 
-def call(String name = 'human') {
-    echo "Hello, ${name}."
-}
+//def call(String name = 'human') {
+  //  echo "Hello, ${name}."
+//}
