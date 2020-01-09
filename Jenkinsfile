@@ -51,37 +51,37 @@ pipeline {
     }
 
     stages {
-        stage("mvn build") {
+        stage("Build") {
             steps {
                     mavenBuild();
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('Unitesting') {
             steps {
                  sonarRun('sonar-6')
             }
         }
 
-        stage("publish to nexus") {
+        stage("Publishing Artifacts") {
             steps {
                 publisToNexus()
             }
         }
 
-        stage('Building image') {
+        stage('Building Container Image') {
             steps {
                 dockerBuild("${IMAGETAG}")
             }
         }
 
-        stage('Push image to registry') {
+        stage('Pushing Image to registry') {
             steps {
                 dockerPush("${IMAGETAG}")
              }
         }
 
-        stage('Deploy Application') {
+        stage('Deploying Application') {
             steps {
                 kubeDeploy("${NAMESPACE}", "${APPNAME}", "${PROJECT}", "${IMAGEVERSION}", "${IMAGETAG}")
             }
