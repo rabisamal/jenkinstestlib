@@ -109,15 +109,5 @@ pipeline {
                 kubeDeploy("${NAMESPACE}", "${APPNAME}", "${PROJECT}", "${IMAGEVERSION}", "${IMAGETAG}")
             }
         }
-    
-
-
-
-
-
-
-
-
-
-}
+    }
 }
