@@ -33,19 +33,21 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                    mavenBuild();
+                    //mavenBuild();
+		sh("sleep 1")
             }
         }
         stage("Waiting") {
             steps {
-		sh("sleep 10")                   
+		sh("sleep 1")                   
             }
         }
         stage('Unitesting') {
             steps {
-                 script {
-                    def groupId = sh(script: "mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.groupId -q -DforceStdout")
-                    println("groupId = ${groupId}")
+                   sh '''
+			 groupId="mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.groupId -q -DforceStdout"
+                         echo $groupId
+		      '''
 		}
             }
         }
