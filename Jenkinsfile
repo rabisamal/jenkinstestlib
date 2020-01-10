@@ -45,7 +45,7 @@ pipeline {
         stage('Unitesting') {
             steps {
                    sh '''
-			 groupId="mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.groupId -q -DforceStdout"
+			 groupId=`mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.groupId -q -DforceStdout`
                          echo $groupId
 		      '''
 		}
