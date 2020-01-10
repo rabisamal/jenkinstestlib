@@ -44,8 +44,9 @@ pipeline {
         stage('Unitesting') {
             steps {
                  script {
-                    def groupId = sh("mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.groupId -q -DforceStdout")
-                    println("groupId = ${groupId}")}
+                    def groupId = sh(script: "mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.groupId -q -DforceStdout")
+                    println("groupId = ${groupId}")
+		}
             }
         }
     }
