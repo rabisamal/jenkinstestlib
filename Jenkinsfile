@@ -41,53 +41,11 @@ pipeline {
 		sh("sleep 10")                   
             }
         }
-
- //       stage('Unitesting') {
- //           steps {
- //                sonarRun('sonar-6')
- //           }
- //       }
-
-        stage("Publishing Artifacts") {
+        stage('Unitesting') {
             steps {
-                //publisToNexus()
-		nexusupload()
-            }
-        }
-
-        stage('Building Container Image') {
-            steps {
-                dockerBuild("${IMAGETAG}")
-            }
-        }
-
-        stage('Pushing Image to registry') {
-            steps {
-                dockerPush("${IMAGETAG}")
-             }
-        }
-
-        stage("Deploying Application to qa") {
-          when {
-    	  expression {
-               return env.BRANCH_NAME != 'master';
-               }
-             }
-            steps {
-                sh("echo not master env.BRANCH_NAME")
-                kubeDeploy("${NAMESPACE}", "${APPNAME}", "${PROJECT}", "${IMAGEVERSION}", "${IMAGETAG}")
-            }
-        }
-    
-        stage("Deploying Application to dev") {
-          when {
-    	  expression {
-               return env.BRANCH_NAME = 'master';
-               }
-             }
-            steps {
-                sh("echo master env.BRANCH_NAME")
-                kubeDeploy("${NAMESPACE}", "${APPNAME}", "${PROJECT}", "${IMAGEVERSION}", "${IMAGETAG}")
+                 script {
+                    def groupId = sh("mvn -q -Dexec.executable='echo' -Dexec.args='${project.groupId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec")
+                    println("groupId = ${groupId}")}
             }
         }
     }
