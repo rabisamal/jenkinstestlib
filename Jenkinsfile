@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-		IMAGENAME = mytest()
-		sh "${IMAGENAME}"
+		mytest()
+		sh "echo ${IMAGENAME}"
             }
         }
     }
