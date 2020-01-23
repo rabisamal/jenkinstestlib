@@ -6,7 +6,6 @@ pipeline {
         stage("Build") {
             steps {
 		mytest()
-		sh "echo ${IMAGENAME}"
             }
         }
     }
