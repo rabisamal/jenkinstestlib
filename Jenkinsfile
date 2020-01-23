@@ -5,7 +5,9 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-		mytest()
+		def z = new mytest()
+                z.call()    
+
             }
         }
     }
